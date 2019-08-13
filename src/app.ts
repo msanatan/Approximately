@@ -1,4 +1,6 @@
 import 'phaser';
+import { PreloadScene } from './scenes/preload';
+import { GameScene } from './scenes/game';
 
 const config: GameConfig = {
   title: 'Scale Up',
@@ -16,7 +18,7 @@ const config: GameConfig = {
       gravity: false,
     },
   },
-  backgroundColor: '#38B6FF'
+  scene: [PreloadScene, GameScene],
 };
 
 export class ScaleUp extends Phaser.Game {
