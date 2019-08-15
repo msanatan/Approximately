@@ -7,6 +7,10 @@
 import 'phaser';
 
 export class PreloadScene extends Phaser.Scene {
+  private baseRadius : number;
+  private separator: Phaser.Geom.Line
+  private playerBall : Phaser.Geom.Circle;
+
   constructor() {
     super({ key: 'PreloadScene' });
   }
@@ -54,6 +58,34 @@ export class PreloadScene extends Phaser.Scene {
       loadingText.destroy();
       percentText.destroy();
     });
+
+    this.separator = new Phaser.Geom.Line(0, height, width, 0);
+    const separatorGraphics = this.add.graphics({
+      x: 0,
+      y: 0,
+      lineStyle: {
+        width: 5,
+        color: 0x000000
+      }
+    });
+    separatorGraphics.strokeLineShape(this.separator);
+    separatorGraphics.generateTexture('separator', 800, 600);
+
+    this.baseRadius = 30;
+    // Create yellow ball for player
+    this.playerBall = new Phaser.Geom.Circle(this.baseRadius, this.baseRadius,
+      this.baseRadius);
+    const playerGraphics = this.add.graphics({
+      fillStyle: {
+        alpha: 1,
+        color: 0xffd700
+      }
+    });
+
+    playerGraphics.fillCircleShape(this.playerBall);
+
+    playerGraphics.generateTexture('playerBall', this.baseRadius*2,
+      this.baseRadius*2);
   }
 
   update(time: number, delta: number): void {
