@@ -1,5 +1,5 @@
 {
-  "name": "scale-up",
+  "name": "grow-up",
   "version": "1.0.0",
   "description": "Can you guess the right size?",
   "main": "build/app.js",
@@ -9,7 +9,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/msanatan/scale-up.git"
+    "url": "git+https://github.com/msanatan/grow-up.git"
   },
   "keywords": [
     "phaser",
@@ -20,11 +20,10 @@
   "author": "Marcus Sanatan <msanatan@gmail.com> (https://msanatan.com)",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/msanatan/scale-up/issues"
+    "url": "https://github.com/msanatan/grow-up/issues"
   },
-  "homepage": "https://github.com/msanatan/scale-up#readme",
+  "homepage": "https://github.com/msanatan/grow-up#readme",
   "dependencies": {
-    "electron": "^6.0.1",
     "parcel-bundler": "^1.12.3",
     "phaser": "^3.19.0",
     "tslint": "^5.18.0",
