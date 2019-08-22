@@ -5,6 +5,8 @@
  */
 
 import 'phaser';
+import playerBall from '../../assets/images/playerBall.png';
+import separator from '../../assets/images/separator.png';
 
 export class PreloadScene extends Phaser.Scene {
   private baseRadius : number;
@@ -59,33 +61,8 @@ export class PreloadScene extends Phaser.Scene {
       percentText.destroy();
     });
 
-    this.separator = new Phaser.Geom.Line(0, 5, width, 5);
-    const separatorGraphics = this.add.graphics({
-      x: 0,
-      y: 0,
-      lineStyle: {
-        width: 10,
-        color: 0xA05700
-      }
-    });
-    separatorGraphics.strokeLineShape(this.separator);
-    separatorGraphics.generateTexture('separator', 800, 10);
-
-    this.baseRadius = 30;
-    // Create yellow ball for player
-    this.playerBall = new Phaser.Geom.Circle(this.baseRadius, this.baseRadius,
-      this.baseRadius);
-    const playerGraphics = this.add.graphics({
-      fillStyle: {
-        alpha: 1,
-        color: 0xffd700
-      }
-    });
-
-    playerGraphics.fillCircleShape(this.playerBall);
-
-    playerGraphics.generateTexture('playerBall', this.baseRadius*2,
-      this.baseRadius*2);
+    this.load.image('separator', separator);
+    this.load.image('playerBall', playerBall);
   }
 
   update(time: number, delta: number): void {
