@@ -3,13 +3,13 @@ import { PreloadScene } from './scenes/preload';
 import { GameScene } from './scenes/game';
 
 const config: GameConfig = {
-  title: 'Scale Up',
+  title: 'Grow Up',
   type: Phaser.AUTO,
   parent: 'app',
   width: 800,
   height: 600,
   scale: {
-    mode: Phaser.Scale.ENVELOP,
+    mode: Phaser.Scale.FIT,
     autoCenter: Phaser.Scale.CENTER_BOTH
   },
   physics: {
