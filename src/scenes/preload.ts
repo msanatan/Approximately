@@ -59,7 +59,7 @@ export class PreloadScene extends Phaser.Scene {
       percentText.destroy();
     });
 
-    this.separator = new Phaser.Geom.Line(0, height / 2, width, height / 2);
+    this.separator = new Phaser.Geom.Line(0, 5, width, 5);
     const separatorGraphics = this.add.graphics({
       x: 0,
       y: 0,
@@ -69,7 +69,7 @@ export class PreloadScene extends Phaser.Scene {
       }
     });
     separatorGraphics.strokeLineShape(this.separator);
-    separatorGraphics.generateTexture('separator', 800, 600);
+    separatorGraphics.generateTexture('separator', 800, 10);
 
     this.baseRadius = 30;
     // Create yellow ball for player
