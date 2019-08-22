@@ -59,13 +59,13 @@ export class PreloadScene extends Phaser.Scene {
       percentText.destroy();
     });
 
-    this.separator = new Phaser.Geom.Line(0, height, width, 0);
+    this.separator = new Phaser.Geom.Line(0, height / 2, width, height / 2);
     const separatorGraphics = this.add.graphics({
       x: 0,
       y: 0,
       lineStyle: {
-        width: 5,
-        color: 0x000000
+        width: 10,
+        color: 0xA05700
       }
     });
     separatorGraphics.strokeLineShape(this.separator);
