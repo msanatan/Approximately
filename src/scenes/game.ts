@@ -7,8 +7,8 @@
 import 'phaser';
 
 export class GameScene extends Phaser.Scene {
-  private player : Phaser.GameObjects.Sprite;
-  private separatorLine : Phaser.GameObjects.Image;
+  private playerBall : Phaser.Physics.Arcade.Sprite;
+  private separatorLine : Phaser.Physics.Arcade.Sprite;
   // private guessBalls: Phaser.GameObjects.Group;
 
   constructor() {
@@ -21,11 +21,12 @@ export class GameScene extends Phaser.Scene {
     let width = this.game.canvas.width;
     let height = this.game.canvas.height;
     this.cameras.main.setBackgroundColor('#38B6FF');
-    this.separatorLine = this.add.image(width, 0, 'separator');
-    this.separatorLine.setOrigin(0.5, 0.5);
-    this.separatorLine.setX(width / 2);
-    this.separatorLine.setY(height / 2);
-    this.player = this.add.sprite(600, 400, 'playerBall');
+    this.separatorLine = this.physics.add.sprite(width / 2, height / 2, 'separator');
+    this.separatorLine.setImmovable(true);
+    this.separatorLine.body.setAllowGravity(false);
+    this.playerBall = this.physics.add.sprite(600, 400, 'playerBall');
+    this.playerBall.setBounce(0.4);
+    this.playerBall.setCollideWorldBounds(true);
   }
 
   update(time: number, delta: number): void {}
