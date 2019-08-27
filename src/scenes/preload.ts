@@ -7,11 +7,9 @@
 import 'phaser';
 import playerBall from '../../assets/images/playerBall.png';
 import separator from '../../assets/images/separator.png';
+import growButton from '../../assets/images/growButton.png';
 
 export class PreloadScene extends Phaser.Scene {
-  private baseRadius : number;
-  private separator: Phaser.Geom.Line
-  private playerBall : Phaser.Geom.Circle;
 
   constructor() {
     super({ key: 'PreloadScene' });
@@ -63,6 +61,7 @@ export class PreloadScene extends Phaser.Scene {
 
     this.load.image('separator', separator);
     this.load.image('playerBall', playerBall);
+    this.load.image('growButton', growButton);
   }
 
   update(time: number, delta: number): void {
