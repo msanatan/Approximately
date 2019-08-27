@@ -2,7 +2,7 @@ import 'phaser';
 import { PreloadScene } from './scenes/preload';
 import { GameScene } from './scenes/game';
 
-const config: GameConfig = {
+const config: Phaser.Types.Core.GameConfig = {
   title: 'Grow Up',
   type: Phaser.AUTO,
   parent: 'app',
@@ -21,11 +21,16 @@ const config: GameConfig = {
       debug: true,
     },
   },
+  render: {
+    antialias: true,
+    transparent: false,
+  },
+  autoFocus: true,
   scene: [PreloadScene, GameScene],
 };
 
 export class ScaleUp extends Phaser.Game {
-  constructor(config: GameConfig) {
+  constructor(config: Phaser.Types.Core.GameConfig) {
     super(config);
   }
 }
