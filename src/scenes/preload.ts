@@ -8,6 +8,7 @@ import 'phaser';
 import playerBall from '../../assets/images/playerBall.png';
 import separator from '../../assets/images/separator.png';
 import growButton from '../../assets/images/growButton.png';
+import checkButton from '../../assets/images/checkButton.png';
 
 export class PreloadScene extends Phaser.Scene {
 
@@ -62,6 +63,7 @@ export class PreloadScene extends Phaser.Scene {
     this.load.image('separator', separator);
     this.load.image('playerBall', playerBall);
     this.load.image('growButton', growButton);
+    this.load.image('checkButton', checkButton);
   }
 
   update(time: number, delta: number): void {
