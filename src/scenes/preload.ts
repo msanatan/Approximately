@@ -66,6 +66,8 @@ export class PreloadScene extends Phaser.Scene {
     this.load.image('guessBall', guessBall);
     this.load.image('growButton', growButton);
     this.load.image('checkButton', checkButton);
+    // Load Google Font script
+    this.load.script('webfont', 'https://ajax.googleapis.com/ajax/libs/webfont/1.6.26/webfont.js');
   }
 
   update(time: number, delta: number): void {
