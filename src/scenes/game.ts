@@ -26,7 +26,7 @@ export class GameScene extends Phaser.Scene {
     this.separatorLine = this.physics.add.sprite(width / 2, (height / 2) - 5, 'separator');
     this.separatorLine.setImmovable(true);
     this.separatorLine.body.setAllowGravity(false);
-    this.playerBall = this.physics.add.sprite(200, 400, 'playerBall').setScale(0.5);
+    this.playerBall = this.physics.add.sprite(200, 450, 'playerBall').setScale(0.2);
     this.playerBall.setBounce(0.4);
     this.playerBall.setCollideWorldBounds(true);
 
@@ -35,6 +35,10 @@ export class GameScene extends Phaser.Scene {
     this.growButton = this.add.sprite(700, 400, 'growButton');
     this.growButton.setInteractive();
     this.growButton.on('pointerdown', () => this.scalePlayerBall());
+
+    // Add button to do comparison
+    this.growButton = this.add.sprite(700, 475, 'checkButton');
+    this.growButton.setInteractive();
   }
 
   update(time: number, delta: number): void {}
