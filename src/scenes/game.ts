@@ -224,7 +224,7 @@ export class GameScene extends Phaser.Scene {
           key: 'guessBall',
           setXY: {
             x: 200,
-            y: 50,
+            y: 50
           },
           bounceX: 0.4,
           bounceY: 0.4,
@@ -244,11 +244,52 @@ export class GameScene extends Phaser.Scene {
           bounceX: 0.4,
           bounceY: 0.4,
           setScale: {
-            x: 1.2,
-            y: 1.2,
+            x: 1.4,
+            y: 1.4
           }
         });
+        break;
+      case 3:
+        this.guessBalls = this.physics.add.group({
+          key: 'guessBall',
+          setXY: {
+            x: 200,
+            y: 50
+          },
+          bounceX: 0.4,
+          bounceY: 0.4,
+          setScale: {
+            x: 1,
+            y: 1
+          }
+        });
+        break;
+      case 4:
+        this.guessBalls = this.physics.add.group({
+          key: 'guessBall',
+          repeat: 2,
+          setXY: {
+            x: 200,
+            y: 50,
+            stepX: 30,
+            stepY: -10
+          },
+          bounceX: 0.4,
+          bounceY: 0.4,
+          setScale: {
+            x: 0.2,
+            y: 0.2
+          }
+        });
+        break;
+      case 5:
+        this.guessBalls = this.physics.add.group();
+        let firstBall = this.guessBalls.create(200, 50, 'guessBall');
+        firstBall.setScale(0.2).setBounce(0.4);
+        let secondBall = this.guessBalls.create(260, 30, 'guessBall');
+        secondBall.setScale(0.8).setBounce(0.6);
         this.lastStage = true;
+        break;
     }
   }
 }
