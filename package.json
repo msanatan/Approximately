@@ -1,5 +1,5 @@
 {
-  "name": "grow-up",
+  "name": "approximately",
   "version": "1.0.0",
   "description": "Can you guess the right size?",
   "main": "build/app.js",
@@ -9,7 +9,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/msanatan/grow-up.git"
+    "url": "git+https://github.com/msanatan/approximately.git"
   },
   "keywords": [
     "phaser",
@@ -20,9 +20,9 @@
   "author": "Marcus Sanatan <msanatan@gmail.com> (https://msanatan.com)",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/msanatan/grow-up/issues"
+    "url": "https://github.com/msanatan/approximately/issues"
   },
-  "homepage": "https://github.com/msanatan/grow-up#readme",
+  "homepage": "https://github.com/msanatan/approximately#readme",
   "dependencies": {
     "parcel-bundler": "^1.12.3",
     "phaser": "^3.19.0",
