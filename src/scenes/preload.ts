@@ -13,6 +13,8 @@ import checkButton from '../../assets/images/checkButton.png';
 import nextButton from '../../assets/images/nextButton.png';
 import retryButton from '../../assets/images/retryButton.png';
 import addButton from '../../assets/images/addButton.png';
+import disabledGrowButton from '../../assets/images/disabledGrowButton.png';
+import disabledAddButton from '../../assets/images/disabledAddButton.png';
 
 export class PreloadScene extends Phaser.Scene {
 
@@ -72,6 +74,8 @@ export class PreloadScene extends Phaser.Scene {
     this.load.image('nextButton', nextButton);
     this.load.image('retryButton', retryButton);
     this.load.image('addButton', addButton);
+    this.load.image('disabledGrowButton', disabledGrowButton);
+    this.load.image('disabledAddButton', disabledAddButton);
     // Load Google Font script
     this.load.script('webfont', 'https://ajax.googleapis.com/ajax/libs/webfont/1.6.26/webfont.js');
   }
