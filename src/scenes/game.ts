@@ -7,11 +7,13 @@
 import 'phaser';
 
 export class GameScene extends Phaser.Scene {
-  private playerBall: Phaser.Physics.Arcade.Sprite;
+  private playerBalls: Phaser.Physics.Arcade.Group;
+  private playerIndex: number;
   private separatorLine: Phaser.Physics.Arcade.Sprite;
   private guessBalls: Phaser.Physics.Arcade.Group;
   private growButton: Phaser.GameObjects.Sprite;
   private checkButton: Phaser.GameObjects.Sprite;
+  private addButton: Phaser.GameObjects.Sprite;
   private nextButton: Phaser.GameObjects.Sprite;
   private retryButton: Phaser.GameObjects.Sprite;
   private growCount: number;
@@ -43,13 +45,18 @@ export class GameScene extends Phaser.Scene {
     this.growCount = 0;
     this.lastStage = false
 
-    // Add button to increase ball size
+    // Create growth button to increase ball size
     this.growButton = this.add.sprite(700, 400, 'growButton');
     this.growButton = this.growButton.setInteractive();
     this.growButton.on('pointerdown', () => this.scalePlayerBall());
 
-    // Add button to compare sizes
-    this.checkButton = this.add.sprite(700, 475, 'checkButton');
+    // Create add button to add a new ball
+    this.addButton = this.add.sprite(700, 475, 'addButton');
+    this.addButton = this.addButton.setInteractive();
+    this.addButton.on('pointerdown', () => this.addBall());
+
+    // Create check button to compare ball sizes
+    this.checkButton = this.add.sprite(700, 550, 'checkButton');
     this.checkButton = this.checkButton.setInteractive();
     this.checkButton.on('pointerdown', () => this.compareBalls());
 
@@ -64,27 +71,46 @@ export class GameScene extends Phaser.Scene {
     });
   }
 
+  addBall() {
+    let currentBall = this.playerBalls.getChildren()[this.playerIndex] as Phaser.Physics.Arcade.Sprite;
+    let newBall = this.playerBalls.create(currentBall.x + 60, 450, 'playerBall') as Phaser.Physics.Arcade.Sprite;
+    newBall
+      .setScale(0.2)
+      .setBounce(0.4);
+    this.playerIndex++; // Move the player index to the new ball
+    this.growCount = 0; // Reset growth count for new ball
+  }
+
   update(time: number, delta: number): void { }
 
   scalePlayerBall() {
     if (this.growCount < 10) {
       this.growCount++;
-      this.playerBall.setScale(this.playerBall.scaleX + 0.2);
+      let currentBall = this.playerBalls.getChildren()[this.playerIndex] as Phaser.Physics.Arcade.Sprite;
+      currentBall.setScale(currentBall.scaleX + 0.2);
     }
+  }
+
+  getTotalSize(group: Phaser.Physics.Arcade.Group): number {
+    let totalSize = 0;
+    group.getChildren().forEach((ball: Phaser.Physics.Arcade.Sprite) => {
+      totalSize += ball.displayWidth;
+    });
+
+    return Math.floor(totalSize);
   }
 
   compareBalls() {
     // Disable game buttons
-    this.checkButton = this.checkButton.disableInteractive();
     this.growButton = this.growButton.disableInteractive();
+    this.addButton = this.addButton.disableInteractive();
+    this.checkButton = this.checkButton.disableInteractive();
 
-    let totalGuessSize = 0;
-    this.guessBalls.getChildren().forEach((gb: Phaser.Physics.Arcade.Sprite) => {
-      totalGuessSize += gb.displayWidth;
-    });
+    let totalPlayerSize = this.getTotalSize(this.playerBalls);
+    let totalGuessSize = this.getTotalSize(this.guessBalls);
 
     // You beat the level
-    if (Math.floor(totalGuessSize) === Math.floor(this.playerBall.displayWidth)) {
+    if (totalPlayerSize === totalGuessSize) {
       if (!this.lastStage) {
         this.levelCompleteText = this.add.text(
           this.physics.world.bounds.centerX,
@@ -160,8 +186,9 @@ export class GameScene extends Phaser.Scene {
 
   reset() {
     // Enable game buttons
-    this.checkButton = this.checkButton.setInteractive();
     this.growButton = this.growButton.setInteractive();
+    this.addButton = this.addButton.setInteractive();
+    this.checkButton = this.checkButton.setInteractive();
 
     // Hide the winning/losing text + buttons
     if (this.levelCompleteText) {
@@ -177,13 +204,25 @@ export class GameScene extends Phaser.Scene {
     }
 
     // Remove the player ball if it exists
-    if (this.playerBall) {
-      this.playerBall.destroy();
+    if (this.playerBalls) {
+      this.playerBalls.destroy(true);
     }
     // Set the player up
-    this.playerBall = this.physics.add.sprite(200, 450, 'playerBall').setScale(0.2);
-    this.playerBall.setBounce(0.4);
-    this.playerBall.setCollideWorldBounds(true);
+    this.playerBalls = this.physics.add.group({
+      key: 'playerBall',
+      setXY: {
+        x: 200,
+        y: 450,
+      },
+      bounceX: 0.4,
+      bounceY: 0.4,
+      setScale: {
+        x: 0.2,
+        y: 0.2
+      },
+      collideWorldBounds: true,
+    });
+    this.playerIndex = 0; // Player index is back at 0
 
     // Remove the guess balls if they exist
     if (this.guessBalls) {
@@ -271,7 +310,7 @@ export class GameScene extends Phaser.Scene {
           setXY: {
             x: 200,
             y: 50,
-            stepX: 30,
+            stepX: 60,
             stepY: -10
           },
           bounceX: 0.4,
