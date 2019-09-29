@@ -7,22 +7,25 @@
 import 'phaser';
 
 export class GameScene extends Phaser.Scene {
-  private playerBall : Phaser.Physics.Arcade.Sprite;
-  private separatorLine : Phaser.Physics.Arcade.Sprite;
-  private guessBalls : Phaser.Physics.Arcade.Group;
-  private growButton : Phaser.GameObjects.Sprite;
-  private checkButton : Phaser.GameObjects.Sprite;
-  private growCount : number;
-  private level : number;
-  private levelText : Phaser.GameObjects.Text;
-  private levelCompleteText : Phaser.GameObjects.Text;
-  private lostLevelText : Phaser.GameObjects.Text;
+  private playerBall: Phaser.Physics.Arcade.Sprite;
+  private separatorLine: Phaser.Physics.Arcade.Sprite;
+  private guessBalls: Phaser.Physics.Arcade.Group;
+  private growButton: Phaser.GameObjects.Sprite;
+  private checkButton: Phaser.GameObjects.Sprite;
+  private nextButton: Phaser.GameObjects.Sprite;
+  private growCount: number;
+  private level: number;
+  private levelText: Phaser.GameObjects.Text;
+  private levelCompleteText: Phaser.GameObjects.Text;
+  private lostLevelText: Phaser.GameObjects.Text;
+  private separatorCollider: Phaser.Physics.Arcade.Collider;
+  private lastStage: boolean;
 
   constructor() {
     super({ key: 'GameScene' });
   }
 
-  init(): void {}
+  init(): void { }
 
   create(): void {
     let width = this.game.canvas.width;
@@ -31,16 +34,12 @@ export class GameScene extends Phaser.Scene {
     this.separatorLine = this.physics.add.sprite(width / 2, (height / 2) - 5, 'separator');
     this.separatorLine.setImmovable(true);
     this.separatorLine.body.setAllowGravity(false);
-    this.playerBall = this.physics.add.sprite(200, 450, 'playerBall').setScale(0.2);
-    this.playerBall.setBounce(0.4);
-    this.playerBall.setCollideWorldBounds(true);
 
     // Set up level
     this.level = 1;
-    this.getLevel();
-    this.physics.add.collider(this.separatorLine, this.guessBalls);
-
     this.growCount = 0;
+    this.lastStage = false
+
     // Add button to increase ball size
     this.growButton = this.add.sprite(700, 400, 'growButton');
     this.growButton.setInteractive();
@@ -51,21 +50,18 @@ export class GameScene extends Phaser.Scene {
     this.checkButton.setInteractive();
     this.checkButton.on('pointerdown', () => this.compareBalls());
 
+    // Load fonts
     WebFont.load({
       google: {
-          families: ['Luckiest Guy']
+        families: ['Luckiest Guy']
       },
       active: () => {
-          this.levelText = this.add.text(20, 40, 'Level: ' + this.level, {
-            fontFamily: 'Luckiest Guy',
-            fontSize: 30,
-            color: '#ffffff'
-          });
+        this.reset();
       }
-  });
+    });
   }
 
-  update(time: number, delta: number): void {}
+  update(time: number, delta: number): void { }
 
   scalePlayerBall() {
     if (this.growCount < 10) {
@@ -80,6 +76,7 @@ export class GameScene extends Phaser.Scene {
       totalGuessSize += gb.displayWidth;
     });
 
+    // You beat the level
     if (Math.floor(totalGuessSize) === Math.floor(this.playerBall.displayWidth)) {
       this.levelCompleteText = this.add.text(
         this.physics.world.bounds.centerX,
@@ -91,7 +88,13 @@ export class GameScene extends Phaser.Scene {
           color: '#ffffff'
         }
       ).setOrigin(0.5);
+
+      // Enable the next stage button
+      this.nextButton = this.add.sprite(this.game.canvas.width / 2, 400, 'nextButton');
+      this.nextButton.setInteractive();
+      this.nextButton.on('pointerdown', () => this.nextLevel());
     } else {
+      // You lost
       this.levelCompleteText = this.add.text(
         this.physics.world.bounds.centerX,
         this.physics.world.bounds.centerY + 40,
@@ -105,8 +108,58 @@ export class GameScene extends Phaser.Scene {
     }
   }
 
+  reset() {
+    // Hide the winning/losing text + buttons
+    if (this.levelCompleteText) {
+      this.levelCompleteText.destroy();
+    }
+    if (this.nextButton) {
+      this.nextButton.destroy();
+    }
+
+    // Remove the player ball if it exists
+    if (this.playerBall) {
+      this.playerBall.destroy();
+    }
+    // Set the player up
+    this.playerBall = this.physics.add.sprite(200, 450, 'playerBall').setScale(0.2);
+    this.playerBall.setBounce(0.4);
+    this.playerBall.setCollideWorldBounds(true);
+
+    // Remove the guess balls if they exist
+    if (this.guessBalls) {
+      this.guessBalls.destroy(true);
+    }
+    // Set up the level i.e. get the guess balls
+    this.getLevel();
+
+    // Add guess ball collision
+    if (this.separatorCollider) {
+      this.separatorCollider.destroy();
+    }
+    this.separatorCollider = this.physics.add.collider(this.separatorLine, this.guessBalls);
+
+    // Reset the level text
+    if (this.levelText) {
+      this.levelText.destroy();
+    }
+    this.levelText = this.add.text(20, 40, 'Level: ' + this.level, {
+      fontFamily: 'Luckiest Guy',
+      fontSize: 30,
+      color: '#ffffff'
+    });
+
+    // Reset grow count
+    this.growCount = 0;
+  }
+
+  nextLevel() {
+    this.level++;
+    this.reset();
+  }
+
   getLevel() {
-    switch(this.level) {
+    switch (this.level) {
       case 1:
         this.guessBalls = this.physics.add.group({
           key: 'guessBall',
@@ -123,19 +176,19 @@ export class GameScene extends Phaser.Scene {
         });
         break;
       case 2:
-          this.guessBalls = this.physics.add.group({
-            key: 'guessBall',
-            setXY: {
-              x: 200,
-              y: 50,
-            },
-            bounceX: 0.4,
-            bounceY: 0.4,
-            setScale: {
-              x: 1.2,
-              y: 1.2,
-            }
-          });
+        this.guessBalls = this.physics.add.group({
+          key: 'guessBall',
+          setXY: {
+            x: 200,
+            y: 50,
+          },
+          bounceX: 0.4,
+          bounceY: 0.4,
+          setScale: {
+            x: 1.2,
+            y: 1.2,
+          }
+        });
     }
   }
 }
