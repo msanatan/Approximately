@@ -3,7 +3,7 @@ import { PreloadScene } from './scenes/preload';
 import { GameScene } from './scenes/game';
 
 const config: Phaser.Types.Core.GameConfig = {
-  title: 'Grow Up',
+  title: 'Approximately',
   type: Phaser.AUTO,
   parent: 'app',
   width: 800,
