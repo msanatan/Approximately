@@ -13,14 +13,16 @@ export class GameScene extends Phaser.Scene {
   private growButton: Phaser.GameObjects.Sprite;
   private checkButton: Phaser.GameObjects.Sprite;
   private nextButton: Phaser.GameObjects.Sprite;
+  private retryButton: Phaser.GameObjects.Sprite;
   private growCount: number;
   private level: number;
   private levelText: Phaser.GameObjects.Text;
   private levelCompleteText: Phaser.GameObjects.Text;
   private lostLevelText: Phaser.GameObjects.Text;
+  private nextText: Phaser.GameObjects.Text;
+  private retryText: Phaser.GameObjects.Text;
   private separatorCollider: Phaser.Physics.Arcade.Collider;
   private lastStage: boolean;
-  private nextText: Phaser.GameObjects.Text;
 
   constructor() {
     super({ key: 'GameScene' });
@@ -43,12 +45,12 @@ export class GameScene extends Phaser.Scene {
 
     // Add button to increase ball size
     this.growButton = this.add.sprite(700, 400, 'growButton');
-    this.growButton.setInteractive();
+    this.growButton = this.growButton.setInteractive();
     this.growButton.on('pointerdown', () => this.scalePlayerBall());
 
     // Add button to compare sizes
     this.checkButton = this.add.sprite(700, 475, 'checkButton');
-    this.checkButton.setInteractive();
+    this.checkButton = this.checkButton.setInteractive();
     this.checkButton.on('pointerdown', () => this.compareBalls());
 
     // Load fonts
@@ -72,6 +74,10 @@ export class GameScene extends Phaser.Scene {
   }
 
   compareBalls() {
+    // Disable game buttons
+    this.checkButton = this.checkButton.disableInteractive();
+    this.growButton = this.growButton.disableInteractive();
+
     let totalGuessSize = 0;
     this.guessBalls.getChildren().forEach((gb: Phaser.Physics.Arcade.Sprite) => {
       totalGuessSize += gb.displayWidth;
@@ -91,11 +97,12 @@ export class GameScene extends Phaser.Scene {
           }
         ).setOrigin(0.5);
 
-        // Enable the next stage button
+        // Show the next stage button
         this.nextButton = this.add.sprite(this.game.canvas.width / 2, 400, 'nextButton');
         this.nextButton.setInteractive();
         this.nextButton.on('pointerdown', () => this.nextLevel());
 
+        // And some helper text
         this.nextText = this.add.text(
           this.physics.world.bounds.centerX,
           450,
@@ -121,13 +128,30 @@ export class GameScene extends Phaser.Scene {
       }
     } else {
       // You lost
-      this.levelCompleteText = this.add.text(
+      this.lostLevelText = this.add.text(
         this.physics.world.bounds.centerX,
         this.physics.world.bounds.centerY + 40,
-        'You Lose :-(',
+        'Not exactly right...',
         {
           fontFamily: 'Luckiest Guy',
           fontSize: 40,
+          color: '#ffffff'
+        }
+      ).setOrigin(0.5);
+
+      // Show the retry stage button
+      this.retryButton = this.add.sprite(this.game.canvas.width / 2, 400, 'retryButton');
+      this.retryButton.setInteractive();
+      this.retryButton.on('pointerdown', () => this.reset());
+
+      // And some helper text
+      this.retryText = this.add.text(
+        this.physics.world.bounds.centerX,
+        450,
+        'Try again?',
+        {
+          fontFamily: 'Luckiest Guy',
+          fontSize: 32,
           color: '#ffffff'
         }
       ).setOrigin(0.5);
@@ -135,13 +159,21 @@ export class GameScene extends Phaser.Scene {
   }
 
   reset() {
+    // Enable game buttons
+    this.checkButton = this.checkButton.setInteractive();
+    this.growButton = this.growButton.setInteractive();
+
     // Hide the winning/losing text + buttons
     if (this.levelCompleteText) {
       this.levelCompleteText.destroy();
-    }
-    if (this.nextButton) {
       this.nextButton.destroy();
       this.nextText.destroy();
+    }
+
+    if (this.lostLevelText) {
+      this.lostLevelText.destroy();
+      this.retryButton.destroy();
+      this.retryText.destroy();
     }
 
     // Remove the player ball if it exists
