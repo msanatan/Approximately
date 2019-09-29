@@ -20,6 +20,7 @@ export class GameScene extends Phaser.Scene {
   private lostLevelText: Phaser.GameObjects.Text;
   private separatorCollider: Phaser.Physics.Arcade.Collider;
   private lastStage: boolean;
+  private nextText: Phaser.GameObjects.Text;
 
   constructor() {
     super({ key: 'GameScene' });
@@ -78,21 +79,46 @@ export class GameScene extends Phaser.Scene {
 
     // You beat the level
     if (Math.floor(totalGuessSize) === Math.floor(this.playerBall.displayWidth)) {
-      this.levelCompleteText = this.add.text(
-        this.physics.world.bounds.centerX,
-        this.physics.world.bounds.centerY + 40,
-        'Good Job!',
-        {
-          fontFamily: 'Luckiest Guy',
-          fontSize: 40,
-          color: '#ffffff'
-        }
-      ).setOrigin(0.5);
+      if (!this.lastStage) {
+        this.levelCompleteText = this.add.text(
+          this.physics.world.bounds.centerX,
+          this.physics.world.bounds.centerY + 40,
+          'Good Job!',
+          {
+            fontFamily: 'Luckiest Guy',
+            fontSize: 40,
+            color: '#ffffff'
+          }
+        ).setOrigin(0.5);
 
-      // Enable the next stage button
-      this.nextButton = this.add.sprite(this.game.canvas.width / 2, 400, 'nextButton');
-      this.nextButton.setInteractive();
-      this.nextButton.on('pointerdown', () => this.nextLevel());
+        // Enable the next stage button
+        this.nextButton = this.add.sprite(this.game.canvas.width / 2, 400, 'nextButton');
+        this.nextButton.setInteractive();
+        this.nextButton.on('pointerdown', () => this.nextLevel());
+
+        this.nextText = this.add.text(
+          this.physics.world.bounds.centerX,
+          450,
+          'Next',
+          {
+            fontFamily: 'Luckiest Guy',
+            fontSize: 32,
+            color: '#ffffff'
+          }
+        ).setOrigin(0.5);
+      } else {
+        // No more stages to go
+        this.levelCompleteText = this.add.text(
+          this.physics.world.bounds.centerX,
+          this.physics.world.bounds.centerY + 40,
+          'Congrats! You\'ve reached the end!',
+          {
+            fontFamily: 'Luckiest Guy',
+            fontSize: 40,
+            color: '#ffffff'
+          }
+        ).setOrigin(0.5);
+      }
     } else {
       // You lost
       this.levelCompleteText = this.add.text(
@@ -115,6 +141,7 @@ export class GameScene extends Phaser.Scene {
     }
     if (this.nextButton) {
       this.nextButton.destroy();
+      this.nextText.destroy();
     }
 
     // Remove the player ball if it exists
@@ -189,6 +216,7 @@ export class GameScene extends Phaser.Scene {
             y: 1.2,
           }
         });
+        this.lastStage = true;
     }
   }
 }
