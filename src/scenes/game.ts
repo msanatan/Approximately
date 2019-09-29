@@ -78,16 +78,28 @@ export class GameScene extends Phaser.Scene {
       .setScale(0.2)
       .setBounce(0.4);
     this.playerIndex++; // Move the player index to the new ball
+
+    // Renable grow button in case it's disabled
+    this.growButton = this.growButton.setTexture('growButton');
+    this.growButton = this.growButton.setInteractive();
     this.growCount = 0; // Reset growth count for new ball
+
+    if (this.playerIndex == 2) {
+      // Change image of sprite
+      this.addButton = this.addButton.setTexture('disabledAddButton');
+      this.addButton = this.addButton.disableInteractive();
+    }
   }
 
   update(time: number, delta: number): void { }
 
   scalePlayerBall() {
-    if (this.growCount < 10) {
-      this.growCount++;
-      let currentBall = this.playerBalls.getChildren()[this.playerIndex] as Phaser.Physics.Arcade.Sprite;
-      currentBall.setScale(currentBall.scaleX + 0.2);
+    this.growCount++;
+    let currentBall = this.playerBalls.getChildren()[this.playerIndex] as Phaser.Physics.Arcade.Sprite;
+    currentBall.setScale(currentBall.scaleX + 0.2);
+    if (this.growCount === 10) {
+      this.growButton = this.growButton.setTexture('disabledGrowButton');
+      this.growButton = this.growButton.disableInteractive();
     }
   }
 
@@ -187,7 +199,9 @@ export class GameScene extends Phaser.Scene {
   reset() {
     // Enable game buttons
     this.growButton = this.growButton.setInteractive();
+    this.growButton = this.growButton.setTexture('growButton');
     this.addButton = this.addButton.setInteractive();
+    this.addButton = this.addButton.setTexture('addButton');
     this.checkButton = this.checkButton.setInteractive();
 
     // Hide the winning/losing text + buttons
