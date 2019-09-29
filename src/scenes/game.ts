@@ -109,7 +109,7 @@ export class GameScene extends Phaser.Scene {
       totalSize += ball.displayWidth;
     });
 
-    return Math.floor(totalSize);
+    return Math.round((totalSize) / 10) * 10;
   }
 
   compareBalls() {
@@ -341,7 +341,59 @@ export class GameScene extends Phaser.Scene {
         firstBall.setScale(0.2).setBounce(0.4);
         let secondBall = this.guessBalls.create(260, 30, 'guessBall');
         secondBall.setScale(0.8).setBounce(0.6);
-        this.lastStage = true;
+        break;
+      case 6:
+        this.guessBalls = this.physics.add.group();
+        let firstBall = this.guessBalls.create(200, 50, 'guessBall');
+        firstBall.setScale(0.2).setBounce(0.4);
+        let secondBall = this.guessBalls.create(260, 30, 'guessBall');
+        secondBall.setScale(0.4).setBounce(0.6);
+        let thirdBall = this.guessBalls.create(320, 30, 'guessBall');
+        thirdBall.setScale(0.8).setBounce(0.6);
+        break;
+      case 7:
+        this.guessBalls = this.physics.add.group();
+        let firstBall = this.guessBalls.create(200, 50, 'guessBall');
+        firstBall.setScale(0.6).setBounce(0.6);
+        let secondBall = this.guessBalls.create(260, 30, 'guessBall');
+        secondBall.setScale(0.4).setBounce(0.6);
+        let thirdBall = this.guessBalls.create(320, 30, 'guessBall');
+        thirdBall.setScale(0.6).setBounce(0.6);
+        break;
+      case 8:
+        this.guessBalls = this.physics.add.group();
+        let firstBall = this.guessBalls.create(200, 50, 'guessBall');
+        firstBall.setScale(0.6).setBounce(0.6);
+        let secondBall = this.guessBalls.create(260, 30, 'guessBall');
+        secondBall.setScale(0.6).setBounce(0.6);
+        let thirdBall = this.guessBalls.create(320, 30, 'guessBall');
+        thirdBall.setScale(0.6).setBounce(0.6);
+        let fourthBall = this.guessBalls.create(380, 30, 'guessBall');
+        fourthBall.setScale(0.6).setBounce(0.6);
+        break;
+      case 9:
+        this.guessBalls = this.physics.add.group();
+        let firstBall = this.guessBalls.create(200, 50, 'guessBall');
+        firstBall.setScale(1).setBounce(0.6);
+        let secondBall = this.guessBalls.create(260, 30, 'guessBall');
+        secondBall.setScale(0.4).setBounce(0.6);
+        let thirdBall = this.guessBalls.create(320, 30, 'guessBall');
+        thirdBall.setScale(0.6).setBounce(0.6);
+        let fourthBall = this.guessBalls.create(380, 30, 'guessBall');
+        fourthBall.setScale(0.6).setBounce(0.6);
+        break;
+      case 10:
+        this.guessBalls = this.physics.add.group();
+        let firstBall = this.guessBalls.create(200, 50, 'guessBall');
+        firstBall.setScale(0.4).setBounce(0.6);
+        let secondBall = this.guessBalls.create(260, 30, 'guessBall');
+        secondBall.setScale(0.4).setBounce(0.6);
+        let thirdBall = this.guessBalls.create(320, 30, 'guessBall');
+        thirdBall.setScale(0.8).setBounce(0.6);
+        let fourthBall = this.guessBalls.create(380, 30, 'guessBall');
+        fourthBall.setScale(0.2).setBounce(0.4);
+        let fifthBall = this.guessBalls.create(420, 30, 'guessBall');
+        fifthBall.setScale(0.4).setBounce(0.6);
         break;
     }
   }
