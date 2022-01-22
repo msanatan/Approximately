@@ -1,4 +1,6 @@
-extends Sprite
+extends Node2D
+
+onready var circle = $Sprite
 
 func _process(delta):
-    rotate(delta * PI * 2)
+    circle.rotate(delta * PI * 2)
