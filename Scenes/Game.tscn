@@ -26,15 +26,10 @@ scale = Vector2( 0.5, 0.5 )
 
 [node name="Answers" parent="." instance=ExtResource( 2 )]
 
-[node name="QuestionTimer" type="Timer" parent="."]
-wait_time = 10.0
-autostart = true
-
-[node name="RefreshTimer" type="Timer" parent="."]
+[node name="GameTimer" type="Timer" parent="."]
 autostart = true
 
 [connection signal="grow_circle" from="." to="GrowingCircle" method="_on_Game_grow_circle"]
 [connection signal="remaining_time_update" from="." to="HUD" method="_on_Game_remaining_time_update"]
 [connection signal="remaining_tries_update" from="." to="HUD" method="_on_Game_remaining_tries_update"]
-[connection signal="timeout" from="QuestionTimer" to="." method="_on_QuestionTimer_timeout"]
-[connection signal="timeout" from="RefreshTimer" to="." method="_on_RefreshTimer_timeout"]
+[connection signal="timeout" from="GameTimer" to="." method="_on_GameTimer_timeout"]

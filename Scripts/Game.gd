@@ -5,16 +5,15 @@ signal remaining_tries_update
 signal grow_circle
 
 export var remaining_tries = 5
-onready var question_timer = $QuestionTimer
+export var game_duration = 60
+onready var question_timer = $GameTimer
+onready var hud = $HUD
 
 func _ready():
-    emit_signal('remaining_tries_update', remaining_tries)
-
-func _on_QuestionTimer_timeout():
-    emit_signal('grow_circle')
-    remaining_tries -= 1
-    emit_signal('remaining_tries_update', remaining_tries)
+    hud.set_remaining_tries_text(remaining_tries)
+    hud.set_countdown_text(game_duration)
 
 
-func _on_RefreshTimer_timeout():
-	emit_signal('remaining_time_update', question_timer.get_time_left())
+func _on_GameTimer_timeout():
+    game_duration -= 1
+    emit_signal('remaining_time_update', game_duration)
