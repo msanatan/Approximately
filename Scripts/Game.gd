@@ -26,9 +26,7 @@ func _ready():
     randomize()
     hud.set_remaining_tries_text(remaining_tries)
     hud.set_countdown_text(game_duration)
-    generate_question()
-    growing_circle.set_question(question_number_1, question_number_2, operator)
-    answer_node.set_answers(answers)
+    reset_question_and_answers()
 
 
 func generate_question():
@@ -45,6 +43,22 @@ func generate_question():
     answers.shuffle()
 
 
+func reset_question_and_answers():
+    generate_question()
+    growing_circle.set_question(question_number_1, question_number_2, operator)
+    answer_node.set_answers(answers, correct_answer)
+
+
 func _on_GameTimer_timeout():
     game_duration -= 1
     emit_signal('remaining_time_update', game_duration)
+
+
+func _on_Answers_wrong_answer_selected():
+    remaining_tries -= 1
+    emit_signal('remaining_tries_update', remaining_tries)
+    emit_signal('grow_circle')
+
+
+func _on_Answers_right_answer_selected():
+    reset_question_and_answers()

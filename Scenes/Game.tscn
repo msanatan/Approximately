@@ -31,4 +31,6 @@ autostart = true
 [connection signal="grow_circle" from="." to="GrowingCircle" method="_on_Game_grow_circle"]
 [connection signal="remaining_time_update" from="." to="HUD" method="_on_Game_remaining_time_update"]
 [connection signal="remaining_tries_update" from="." to="HUD" method="_on_Game_remaining_tries_update"]
+[connection signal="right_answer_selected" from="Answers" to="." method="_on_Answers_right_answer_selected"]
+[connection signal="wrong_answer_selected" from="Answers" to="." method="_on_Answers_wrong_answer_selected"]
 [connection signal="timeout" from="GameTimer" to="." method="_on_GameTimer_timeout"]

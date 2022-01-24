@@ -73,3 +73,8 @@ custom_styles/focus = SubResource( 6 )
 custom_styles/disabled = SubResource( 7 )
 custom_styles/normal = SubResource( 3 )
 text = "33"
+
+[connection signal="pressed" from="Answer1" to="." method="_on_Answer1_pressed"]
+[connection signal="pressed" from="Answer2" to="." method="_on_Answer2_pressed"]
+[connection signal="pressed" from="Answer3" to="." method="_on_Answer3_pressed"]
+[connection signal="pressed" from="Answer4" to="." method="_on_Answer4_pressed"]
