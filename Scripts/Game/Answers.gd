@@ -1,9 +1,9 @@
 extends Node2D
 
-onready var answer_1: Label = $Answer1
-onready var answer_2: Label = $Answer2
-onready var answer_3: Label = $Answer3
-onready var answer_4: Label = $Answer4
+onready var answer_1: Button = $Answer1
+onready var answer_2: Button = $Answer2
+onready var answer_3: Button = $Answer3
+onready var answer_4: Button = $Answer4
 
 
 func set_answers(answers: Array):
