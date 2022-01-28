@@ -53,12 +53,23 @@ func _on_GameTimer_timeout():
     game_duration -= 1
     emit_signal('remaining_time_update', game_duration)
 
+    if game_duration == 0:
+        $GameTimer.stop()
+        $GameOverTransition.transition_start()
+
 
 func _on_Answers_wrong_answer_selected():
     remaining_tries -= 1
     emit_signal('remaining_tries_update', remaining_tries)
     emit_signal('grow_circle')
 
+    if remaining_tries == 0:
+        $GameOverTransition.transition_start()
+
 
 func _on_Answers_right_answer_selected():
     reset_question_and_answers()
+
+
+func _on_GameOverTransition_transition_finished():
+	get_tree().change_scene('res://Scenes/GameOver.tscn')
