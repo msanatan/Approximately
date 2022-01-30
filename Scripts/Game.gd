@@ -41,6 +41,7 @@ func generate_question():
     var wrong_answer_2: int = wrong_answer_1 + answer_diff[randi() % answer_diff.size()]
     answers = [correct_answer, close_answer, wrong_answer_1, wrong_answer_2]
     answers.shuffle()
+    Global.total_questions += 1
 
 
 func reset_question_and_answers():
@@ -59,6 +60,7 @@ func _on_GameTimer_timeout():
 
 
 func _on_Answers_wrong_answer_selected():
+    Global.total_wrong += 1
     remaining_tries -= 1
     emit_signal('remaining_tries_update', remaining_tries)
     emit_signal('grow_circle')
@@ -68,6 +70,7 @@ func _on_Answers_wrong_answer_selected():
 
 
 func _on_Answers_right_answer_selected():
+    Global.total_correct += 1
     reset_question_and_answers()
 
 

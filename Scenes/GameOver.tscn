@@ -1,6 +1,8 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://Assets/Resources/TitleFont.tres" type="DynamicFont" id=1]
+[ext_resource path="res://Scripts/GameOver.gd" type="Script" id=2]
+[ext_resource path="res://Assets/Fonts/Kenney Blocks.ttf" type="DynamicFontData" id=3]
 
 [sub_resource type="DynamicFontData" id=1]
 font_path = "res://Assets/Fonts/Kenney Pixel Square.ttf"
@@ -9,7 +11,12 @@ font_path = "res://Assets/Fonts/Kenney Pixel Square.ttf"
 size = 18
 font_data = SubResource( 1 )
 
+[sub_resource type="DynamicFont" id=3]
+size = 22
+font_data = ExtResource( 3 )
+
 [node name="GameOver" type="Node2D"]
+script = ExtResource( 2 )
 
 [node name="ColorRect" type="ColorRect" parent="."]
 anchor_right = 1.0
@@ -20,20 +27,10 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="VBoxContainer" type="VBoxContainer" parent="."]
-anchor_right = 1.0
-anchor_bottom = 1.0
+[node name="TitleLabel" type="Label" parent="."]
 margin_top = 64.0
 margin_right = 432.0
-margin_bottom = 768.0
-custom_constants/separation = 96
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="TitleLabel" type="Label" parent="VBoxContainer"]
-margin_right = 432.0
-margin_bottom = 54.0
+margin_bottom = 118.0
 custom_colors/font_color = Color( 0.0588235, 0.239216, 0.666667, 1 )
 custom_fonts/font = ExtResource( 1 )
 text = "Round Complete"
@@ -43,34 +40,62 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="StatsContainer" type="VBoxContainer" parent="VBoxContainer"]
-margin_top = 150.0
-margin_right = 432.0
-margin_bottom = 266.0
+[node name="StatsContainer" type="VBoxContainer" parent="."]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = 32.0
+margin_top = 192.0
+margin_right = 400.0
+margin_bottom = 308.0
 custom_constants/separation = 16
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
-[node name="TotalQuestionsLabel" type="Label" parent="VBoxContainer/StatsContainer"]
-margin_right = 432.0
+[node name="TotalQuestionsLabel" type="Label" parent="StatsContainer"]
+margin_right = 368.0
 margin_bottom = 28.0
 custom_colors/font_color = Color( 0.0588235, 0.239216, 0.666667, 1 )
 custom_fonts/font = SubResource( 2 )
 text = "Total Questions: "
 valign = 1
 
-[node name="TotalCorrectLabel" type="Label" parent="VBoxContainer/StatsContainer"]
+[node name="TotalCorrectLabel" type="Label" parent="StatsContainer"]
 margin_top = 44.0
-margin_right = 432.0
+margin_right = 368.0
 margin_bottom = 72.0
 custom_colors/font_color = Color( 0.0588235, 0.239216, 0.666667, 1 )
 custom_fonts/font = SubResource( 2 )
 text = "Total Correct: "
 valign = 1
 
-[node name="TotalWrongLabel" type="Label" parent="VBoxContainer/StatsContainer"]
+[node name="TotalWrongLabel" type="Label" parent="StatsContainer"]
 margin_top = 88.0
-margin_right = 432.0
+margin_right = 368.0
 margin_bottom = 116.0
 custom_colors/font_color = Color( 0.0588235, 0.239216, 0.666667, 1 )
 custom_fonts/font = SubResource( 2 )
 text = "Total Wrong: "
 valign = 1
+
+[node name="ResultsMessageLabel" type="Label" parent="."]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = 16.0
+margin_top = 384.0
+margin_right = 416.0
+margin_bottom = 459.0
+custom_colors/font_color = Color( 0.0588235, 0.239216, 0.666667, 1 )
+custom_fonts/font = SubResource( 3 )
+text = "Congratulations!
+You got them all correct!"
+align = 1
+valign = 1
+autowrap = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
