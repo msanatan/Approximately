@@ -3,7 +3,8 @@ extends Node
 signal transition_finished
 
 
-func transition_start():
+func transition_start(colour:String='#ffffff'):
+    $TransitionCircle.modulate = colour
     $AnimationPlayer.play('WhiteCircleGrow')
 
 
