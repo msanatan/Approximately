@@ -32,6 +32,7 @@ tracks/1/keys = {
 
 [sub_resource type="Animation" id=2]
 resource_name = "WhiteCircleGrow"
+length = 1.5
 tracks/0/type = "value"
 tracks/0/path = NodePath("TransitionCircle:visible")
 tracks/0/interp = 1
@@ -51,7 +52,7 @@ tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/keys = {
-"times": PoolRealArray( 0, 0.7 ),
+"times": PoolRealArray( 0, 1.5 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 0,
 "values": [ Vector2( 0.1, 0.1 ), Vector2( 2.6, 2.6 ) ]
