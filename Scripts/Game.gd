@@ -75,4 +75,4 @@ func _on_Answers_right_answer_selected():
 
 
 func _on_GameOverTransition_transition_finished():
-	get_tree().change_scene('res://Scenes/GameOver.tscn')
+    get_tree().change_scene('res://Scenes/GameOver.tscn')

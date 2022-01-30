@@ -1,8 +1,11 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=14 format=2]
 
 [ext_resource path="res://Assets/Resources/TitleFont.tres" type="DynamicFont" id=1]
 [ext_resource path="res://Scripts/GameOver.gd" type="Script" id=2]
 [ext_resource path="res://Assets/Fonts/Kenney Blocks.ttf" type="DynamicFontData" id=3]
+[ext_resource path="res://Assets/Resources/ButtonFont.tres" type="DynamicFont" id=4]
+[ext_resource path="res://Assets/Resources/MenuButtonNormalStyleBox.tres" type="StyleBox" id=5]
+[ext_resource path="res://Scenes/Game/GameOverTransition.tscn" type="PackedScene" id=6]
 
 [sub_resource type="DynamicFontData" id=1]
 font_path = "res://Assets/Fonts/Kenney Pixel Square.ttf"
@@ -14,6 +17,21 @@ font_data = SubResource( 1 )
 [sub_resource type="DynamicFont" id=3]
 size = 22
 font_data = ExtResource( 3 )
+
+[sub_resource type="StyleBoxFlat" id=11]
+bg_color = Color( 1, 1, 1, 1 )
+border_width_left = 6
+border_width_top = 6
+border_width_right = 6
+border_width_bottom = 6
+border_color = Color( 0.0588235, 0.239216, 0.666667, 1 )
+
+[sub_resource type="StyleBoxFlat" id=10]
+bg_color = Color( 0.0588235, 0.239216, 0.666667, 1 )
+
+[sub_resource type="StyleBoxEmpty" id=8]
+
+[sub_resource type="StyleBoxEmpty" id=7]
 
 [node name="GameOver" type="Node2D"]
 script = ExtResource( 2 )
@@ -99,3 +117,55 @@ autowrap = true
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="ButtonsContainer" type="VBoxContainer" parent="."]
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+margin_left = 24.0
+margin_top = 544.0
+margin_right = 408.0
+margin_bottom = 672.0
+custom_constants/separation = 16
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ReplayButton" type="Button" parent="ButtonsContainer"]
+margin_right = 384.0
+margin_bottom = 62.0
+custom_colors/font_color_disabled = Color( 0.0588235, 0.239216, 0.666667, 1 )
+custom_colors/font_color_focus = Color( 0.0588235, 0.239216, 0.666667, 1 )
+custom_colors/font_color = Color( 0.0588235, 0.239216, 0.666667, 1 )
+custom_colors/font_color_hover = Color( 0.0588235, 0.239216, 0.666667, 1 )
+custom_colors/font_color_pressed = Color( 1, 1, 1, 1 )
+custom_fonts/font = ExtResource( 4 )
+custom_styles/hover = SubResource( 11 )
+custom_styles/pressed = SubResource( 10 )
+custom_styles/focus = SubResource( 8 )
+custom_styles/disabled = SubResource( 7 )
+custom_styles/normal = ExtResource( 5 )
+text = "Play Again"
+
+[node name="MainMenuButton" type="Button" parent="ButtonsContainer"]
+margin_top = 78.0
+margin_right = 384.0
+margin_bottom = 140.0
+custom_colors/font_color_disabled = Color( 0.0588235, 0.239216, 0.666667, 1 )
+custom_colors/font_color_focus = Color( 0.0588235, 0.239216, 0.666667, 1 )
+custom_colors/font_color = Color( 0.0588235, 0.239216, 0.666667, 1 )
+custom_colors/font_color_hover = Color( 0.0588235, 0.239216, 0.666667, 1 )
+custom_colors/font_color_pressed = Color( 1, 1, 1, 1 )
+custom_fonts/font = ExtResource( 4 )
+custom_styles/hover = SubResource( 11 )
+custom_styles/pressed = SubResource( 10 )
+custom_styles/focus = SubResource( 8 )
+custom_styles/disabled = SubResource( 7 )
+custom_styles/normal = ExtResource( 5 )
+text = "Return to Menu"
+
+[node name="GameOverTransition" parent="." instance=ExtResource( 6 )]
+
+[connection signal="pressed" from="ButtonsContainer/ReplayButton" to="." method="_on_ReplayButton_pressed"]
+[connection signal="transition_finished" from="GameOverTransition" to="." method="_on_GameOverTransition_transition_finished"]
