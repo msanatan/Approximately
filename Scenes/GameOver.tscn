@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=2]
+[gd_scene load_steps=15 format=2]
 
 [ext_resource path="res://Assets/Resources/TitleFont.tres" type="DynamicFont" id=1]
 [ext_resource path="res://Scripts/GameOver.gd" type="Script" id=2]
@@ -6,6 +6,7 @@
 [ext_resource path="res://Assets/Resources/ButtonFont.tres" type="DynamicFont" id=4]
 [ext_resource path="res://Assets/Resources/MenuButtonNormalStyleBox.tres" type="StyleBox" id=5]
 [ext_resource path="res://Scenes/Game/GameOverTransition.tscn" type="PackedScene" id=6]
+[ext_resource path="res://Scenes/Game/FadeTransition.tscn" type="PackedScene" id=7]
 
 [sub_resource type="DynamicFontData" id=1]
 font_path = "res://Assets/Fonts/Kenney Pixel Square.ttf"
@@ -167,5 +168,10 @@ text = "Return to Menu"
 
 [node name="GameOverTransition" parent="." instance=ExtResource( 6 )]
 
+[node name="FadeTransition" parent="." instance=ExtResource( 7 )]
+visible = false
+
 [connection signal="pressed" from="ButtonsContainer/ReplayButton" to="." method="_on_ReplayButton_pressed"]
+[connection signal="pressed" from="ButtonsContainer/MainMenuButton" to="." method="_on_MainMenuButton_pressed"]
 [connection signal="transition_finished" from="GameOverTransition" to="." method="_on_GameOverTransition_transition_finished"]
+[connection signal="transition_finished" from="FadeTransition" to="." method="_on_FadeTransition_transition_finished"]
