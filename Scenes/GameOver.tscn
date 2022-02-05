@@ -167,6 +167,7 @@ custom_styles/normal = ExtResource( 5 )
 text = "Return to Menu"
 
 [node name="CircleGrowingTransition" parent="." instance=ExtResource( 6 )]
+position = Vector2( 216, 384 )
 
 [node name="FadeTransition" parent="." instance=ExtResource( 7 )]
 visible = false
