@@ -43,6 +43,9 @@ custom_styles/focus = SubResource( 6 )
 custom_styles/disabled = SubResource( 7 )
 custom_styles/normal = SubResource( 3 )
 text = "27"
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="Answer3" type="Button" parent="."]
 margin_left = 224.0
