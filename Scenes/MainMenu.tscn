@@ -4,7 +4,7 @@
 [ext_resource path="res://Scripts/MainMenu.gd" type="Script" id=2]
 [ext_resource path="res://Assets/Images/Circle.png" type="Texture" id=3]
 [ext_resource path="res://Assets/Resources/ButtonFont.tres" type="DynamicFont" id=4]
-[ext_resource path="res://Scenes/Game/GameOverTransition.tscn" type="PackedScene" id=5]
+[ext_resource path="res://Scenes/Game/CircleGrowingTransition.tscn" type="PackedScene" id=5]
 [ext_resource path="res://Scenes/Game/FadeTransition.tscn" type="PackedScene" id=6]
 
 [sub_resource type="StyleBoxEmpty" id=1]
@@ -67,11 +67,11 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="GameOverTransition" parent="." instance=ExtResource( 5 )]
+[node name="CircleGrowingTransition" parent="." instance=ExtResource( 5 )]
 position = Vector2( 216, 384 )
 
 [node name="FadeTransition" parent="." instance=ExtResource( 6 )]
 
 [connection signal="pressed" from="PlayButton" to="." method="_on_PlayButton_pressed"]
-[connection signal="transition_finished" from="GameOverTransition" to="." method="_on_GameOverTransition_transition_finished"]
+[connection signal="transition_finished" from="CircleGrowingTransition" to="." method="_on_CircleGrowingTransition_transition_finished"]
 [connection signal="transition_finished" from="FadeTransition" to="." method="_on_FadeTransition_transition_finished"]

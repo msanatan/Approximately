@@ -10,10 +10,10 @@ func _process(delta):
 
 
 func _on_PlayButton_pressed():
-    $GameOverTransition.transition_start('#0f3daa')
+    $CircleGrowingTransition.transition_start('#0f3daa')
 
 
-func _on_GameOverTransition_transition_finished():
+func _on_CircleGrowingTransition_transition_finished():
     get_tree().change_scene('res://Scenes/Game.tscn')
 
 

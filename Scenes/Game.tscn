@@ -4,7 +4,7 @@
 [ext_resource path="res://Scenes/Game/Answers.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Scenes/Game/HUD.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Scripts/Game.gd" type="Script" id=4]
-[ext_resource path="res://Scenes/Game/GameOverTransition.tscn" type="PackedScene" id=5]
+[ext_resource path="res://Scenes/Game/CircleGrowingTransition.tscn" type="PackedScene" id=5]
 
 [node name="Game" type="Node2D"]
 script = ExtResource( 4 )
@@ -29,7 +29,7 @@ position = Vector2( 216, 384 )
 [node name="GameTimer" type="Timer" parent="."]
 autostart = true
 
-[node name="GameOverTransition" parent="." instance=ExtResource( 5 )]
+[node name="CircleGrowingTransition" parent="." instance=ExtResource( 5 )]
 position = Vector2( 216, 384 )
 
 [connection signal="grow_circle" from="." to="GrowingCircle" method="_on_Game_grow_circle"]
@@ -38,4 +38,4 @@ position = Vector2( 216, 384 )
 [connection signal="right_answer_selected" from="Answers" to="." method="_on_Answers_right_answer_selected"]
 [connection signal="wrong_answer_selected" from="Answers" to="." method="_on_Answers_wrong_answer_selected"]
 [connection signal="timeout" from="GameTimer" to="." method="_on_GameTimer_timeout"]
-[connection signal="transition_finished" from="GameOverTransition" to="." method="_on_GameOverTransition_transition_finished"]
+[connection signal="transition_finished" from="CircleGrowingTransition" to="." method="_on_CircleGrowingTransition_transition_finished"]

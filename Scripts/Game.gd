@@ -56,7 +56,7 @@ func _on_GameTimer_timeout():
 
     if game_duration == 0:
         $GameTimer.stop()
-        $GameOverTransition.transition_start()
+        $CircleGrowingTransition.transition_start()
 
 
 func _on_Answers_wrong_answer_selected():
@@ -66,7 +66,7 @@ func _on_Answers_wrong_answer_selected():
     emit_signal('grow_circle')
 
     if remaining_tries == 0:
-        $GameOverTransition.transition_start()
+        $CircleGrowingTransition.transition_start()
 
 
 func _on_Answers_right_answer_selected():
@@ -74,5 +74,5 @@ func _on_Answers_right_answer_selected():
     reset_question_and_answers()
 
 
-func _on_GameOverTransition_transition_finished():
+func _on_CircleGrowingTransition_transition_finished():
     get_tree().change_scene('res://Scenes/GameOver.tscn')
