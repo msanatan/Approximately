@@ -42,7 +42,7 @@ __meta__ = {
 
 [node name="CircleSprite" type="Sprite" parent="."]
 modulate = Color( 0.0588235, 0.239216, 0.666667, 1 )
-position = Vector2( 216, 352 )
+position = Vector2( 216, 384 )
 scale = Vector2( 0.5, 0.5 )
 texture = ExtResource( 3 )
 
@@ -52,9 +52,9 @@ anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 margin_left = 152.0
-margin_top = 320.0
+margin_top = 352.0
 margin_right = 280.0
-margin_bottom = 384.0
+margin_bottom = 416.0
 custom_colors/font_color = Color( 1, 1, 1, 1 )
 custom_fonts/font = ExtResource( 4 )
 custom_styles/hover = SubResource( 1 )
@@ -68,6 +68,7 @@ __meta__ = {
 }
 
 [node name="GameOverTransition" parent="." instance=ExtResource( 5 )]
+position = Vector2( 216, 384 )
 
 [node name="FadeTransition" parent="." instance=ExtResource( 6 )]
 

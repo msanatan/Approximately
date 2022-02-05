@@ -22,7 +22,7 @@ __meta__ = {
 [node name="HUD" parent="." instance=ExtResource( 3 )]
 
 [node name="GrowingCircle" parent="." instance=ExtResource( 1 )]
-position = Vector2( 216, 352 )
+position = Vector2( 216, 384 )
 
 [node name="Answers" parent="." instance=ExtResource( 2 )]
 
@@ -30,6 +30,7 @@ position = Vector2( 216, 352 )
 autostart = true
 
 [node name="GameOverTransition" parent="." instance=ExtResource( 5 )]
+position = Vector2( 216, 384 )
 
 [connection signal="grow_circle" from="." to="GrowingCircle" method="_on_Game_grow_circle"]
 [connection signal="remaining_time_update" from="." to="HUD" method="_on_Game_remaining_time_update"]
