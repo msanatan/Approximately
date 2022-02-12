@@ -19,6 +19,9 @@
 
 [node name="MainMenu" type="Node2D"]
 script = ExtResource( 2 )
+__meta__ = {
+"_edit_vertical_guides_": [ 241.0 ]
+}
 
 [node name="ColorRect" type="ColorRect" parent="."]
 margin_right = 432.0
@@ -27,18 +30,21 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="TitleLabel" type="Label" parent="."]
+[node name="TitleLabel" type="RichTextLabel" parent="."]
 margin_top = 64.0
 margin_right = 432.0
-margin_bottom = 118.0
-custom_colors/font_color = Color( 0.0588235, 0.239216, 0.666667, 1 )
-custom_fonts/font = ExtResource( 1 )
+margin_bottom = 128.0
+custom_colors/default_color = Color( 0.0588235, 0.239216, 0.666667, 1 )
+custom_fonts/normal_font = ExtResource( 1 )
+bbcode_enabled = true
+bbcode_text = "[center][wave amp=50 freq=-10]Approximately[/wave][/center]"
 text = "Approximately"
-align = 1
-valign = 1
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="CircleGrowingTransition" parent="." instance=ExtResource( 5 )]
+position = Vector2( 216, 384 )
 
 [node name="CircleSprite" type="Sprite" parent="."]
 modulate = Color( 0.0588235, 0.239216, 0.666667, 1 )
@@ -67,11 +73,9 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="CircleGrowingTransition" parent="." instance=ExtResource( 5 )]
-position = Vector2( 216, 384 )
-
 [node name="FadeTransition" parent="." instance=ExtResource( 6 )]
+position = Vector2( 136, 16 )
 
-[connection signal="pressed" from="PlayButton" to="." method="_on_PlayButton_pressed"]
 [connection signal="transition_finished" from="CircleGrowingTransition" to="." method="_on_CircleGrowingTransition_transition_finished"]
+[connection signal="pressed" from="PlayButton" to="." method="_on_PlayButton_pressed"]
 [connection signal="transition_finished" from="FadeTransition" to="." method="_on_FadeTransition_transition_finished"]
