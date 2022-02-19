@@ -27,6 +27,7 @@ func set_answers(answers: Array, correct_ans: int):
     correct_answer = correct_ans
 
 func is_correct_answer(answer: int, node: Button):
+    Global.total_questions += 1
     var is_correct: bool = answer == correct_answer
 
     if is_correct:
