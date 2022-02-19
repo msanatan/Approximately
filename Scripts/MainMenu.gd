@@ -10,6 +10,7 @@ func _process(delta):
 
 
 func _on_PlayButton_pressed():
+    $PlayButton.visible = false
     $CircleGrowingTransition.transition_start('#0f3daa')
 
 
