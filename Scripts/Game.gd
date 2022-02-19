@@ -3,7 +3,6 @@ extends Node2D
 signal remaining_time_update
 signal remaining_tries_update
 signal grow_circle
-signal new_question
 
 export var remaining_tries: int = 5
 export var game_duration: int = 60
