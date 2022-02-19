@@ -73,12 +73,12 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="TotalQuestionsLabel" type="Label" parent="StatsContainer"]
+[node name="TotalAttemptsLabel" type="Label" parent="StatsContainer"]
 margin_right = 368.0
 margin_bottom = 28.0
 custom_colors/font_color = Color( 0.0588235, 0.239216, 0.666667, 1 )
 custom_fonts/font = SubResource( 2 )
-text = "Total Questions: "
+text = "Total Attempts: "
 valign = 1
 
 [node name="TotalCorrectLabel" type="Label" parent="StatsContainer"]
