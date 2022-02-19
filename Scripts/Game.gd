@@ -17,7 +17,8 @@ var answer_diff: Array = [-3, -2, -1, 1, 2, 3]
 var wrong_answer_diff: Array = [-6, -5, -4, 4, 5, 6]
 var question_number_1: int
 var question_number_2: int
-var operator: String = "+"
+var operators: Array = ["+", "-"]
+var operator: String
 var answers: Array = []
 var correct_answer: int = 0
 
@@ -30,11 +31,15 @@ func _ready():
 
 
 func generate_question():
-    question_number_1 = randi() % 35 + 5
-    question_number_2 = randi() % 35 + 5
+    question_number_1 = randi() % 95 + 5
+    question_number_2 = randi() % 95 + 5
+    operator = operators[randi() % 2]
+
 
     if operator == "+":
         correct_answer = question_number_1 + question_number_2
+    elif operator == "-":
+        correct_answer = question_number_1 - question_number_2
 
     var close_answer: int = correct_answer + answer_diff[randi() % answer_diff.size()]
     var wrong_answer_1: int = correct_answer + wrong_answer_diff[randi() % answer_diff.size()]
