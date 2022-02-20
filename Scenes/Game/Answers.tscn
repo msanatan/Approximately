@@ -27,7 +27,7 @@ tracks/0/keys = {
 "times": PoolRealArray( 0.5, 1, 1.5, 2 ),
 "transitions": PoolRealArray( 1, 1, 1, 1 ),
 "update": 0,
-"values": [ Vector2( 64, 16 ), Vector2( 64, 0 ), Vector2( 64, -16 ), Vector2( 64, 0 ) ]
+"values": [ Vector2( 48, 16 ), Vector2( 48, 0 ), Vector2( 48, -16 ), Vector2( 48, 0 ) ]
 }
 tracks/1/type = "value"
 tracks/1/path = NodePath("Answer2:rect_position")
@@ -39,7 +39,7 @@ tracks/1/keys = {
 "times": PoolRealArray( 0.5, 1, 1.5, 2 ),
 "transitions": PoolRealArray( 1, 1, 1, 1 ),
 "update": 0,
-"values": [ Vector2( 144, -16 ), Vector2( 144, 0 ), Vector2( 144, 16 ), Vector2( 144, 0 ) ]
+"values": [ Vector2( 136, -16 ), Vector2( 136, 0 ), Vector2( 136, 16 ), Vector2( 136, 0 ) ]
 }
 tracks/2/type = "value"
 tracks/2/path = NodePath("Answer3:rect_position")
@@ -51,7 +51,7 @@ tracks/2/keys = {
 "times": PoolRealArray( 0.5, 1, 1.5, 2 ),
 "transitions": PoolRealArray( 1, 1, 1, 1 ),
 "update": 0,
-"values": [ Vector2( 224, 16 ), Vector2( 224, 0 ), Vector2( 224, -16 ), Vector2( 224, 0 ) ]
+"values": [ Vector2( 232, 16 ), Vector2( 232, 0 ), Vector2( 232, -16 ), Vector2( 232, 0 ) ]
 }
 tracks/3/type = "value"
 tracks/3/path = NodePath("Answer4:rect_position")
@@ -63,7 +63,7 @@ tracks/3/keys = {
 "times": PoolRealArray( 0.5, 1, 1.5, 2 ),
 "transitions": PoolRealArray( 1, 1, 1, 1 ),
 "update": 0,
-"values": [ Vector2( 304, -16 ), Vector2( 304, 0 ), Vector2( 304, 16 ), Vector2( 304, 0 ) ]
+"values": [ Vector2( 320, -16 ), Vector2( 320, 0 ), Vector2( 320, 16 ), Vector2( 320, 0 ) ]
 }
 
 [sub_resource type="Animation" id=9]
@@ -78,7 +78,7 @@ tracks/0/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 0,
-"values": [ Vector2( 64, 32 ) ]
+"values": [ Vector2( 48, 32 ) ]
 }
 tracks/1/type = "value"
 tracks/1/path = NodePath("Answer2:rect_position")
@@ -90,7 +90,7 @@ tracks/1/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 0,
-"values": [ Vector2( 144, 0 ) ]
+"values": [ Vector2( 136, 0 ) ]
 }
 tracks/2/type = "value"
 tracks/2/path = NodePath("Answer3:rect_position")
@@ -102,7 +102,7 @@ tracks/2/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 0,
-"values": [ Vector2( 224, 32 ) ]
+"values": [ Vector2( 232, 32 ) ]
 }
 tracks/3/type = "value"
 tracks/3/path = NodePath("Answer4:rect_position")
@@ -114,7 +114,7 @@ tracks/3/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 0,
-"values": [ Vector2( 304, 0 ) ]
+"values": [ Vector2( 320, 0 ) ]
 }
 
 [node name="Answers" type="Node2D"]
@@ -122,9 +122,9 @@ position = Vector2( 0, 640 )
 script = ExtResource( 1 )
 
 [node name="Answer1" type="Button" parent="."]
-margin_left = 64.0
+margin_left = 48.0
 margin_top = 32.0
-margin_right = 120.0
+margin_right = 112.0
 margin_bottom = 98.0
 custom_fonts/font = ExtResource( 2 )
 custom_styles/hover = SubResource( 4 )
@@ -138,8 +138,8 @@ __meta__ = {
 }
 
 [node name="Answer2" type="Button" parent="."]
-margin_left = 144.0
-margin_right = 210.0
+margin_left = 136.0
+margin_right = 202.0
 margin_bottom = 66.0
 custom_fonts/font = ExtResource( 2 )
 custom_styles/hover = SubResource( 4 )
@@ -153,9 +153,9 @@ __meta__ = {
 }
 
 [node name="Answer3" type="Button" parent="."]
-margin_left = 224.0
+margin_left = 232.0
 margin_top = 32.0
-margin_right = 290.0
+margin_right = 298.0
 margin_bottom = 98.0
 custom_fonts/font = ExtResource( 2 )
 custom_styles/hover = SubResource( 4 )
@@ -169,8 +169,8 @@ __meta__ = {
 }
 
 [node name="Answer4" type="Button" parent="."]
-margin_left = 304.0
-margin_right = 370.0
+margin_left = 320.0
+margin_right = 386.0
 margin_bottom = 66.0
 custom_fonts/font = ExtResource( 2 )
 custom_styles/hover = SubResource( 4 )
