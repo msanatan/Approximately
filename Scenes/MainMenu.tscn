@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://Assets/Resources/TitleFont.tres" type="DynamicFont" id=1]
 [ext_resource path="res://Scripts/MainMenu.gd" type="Script" id=2]
@@ -6,7 +6,6 @@
 [ext_resource path="res://Assets/Resources/ButtonFont.tres" type="DynamicFont" id=4]
 [ext_resource path="res://Scenes/Game/CircleGrowingTransition.tscn" type="PackedScene" id=5]
 [ext_resource path="res://Scenes/Game/FadeTransition.tscn" type="PackedScene" id=6]
-[ext_resource path="res://Assets/Audio/Music/Ikson - Shine.mp3" type="AudioStream" id=7]
 
 [sub_resource type="StyleBoxEmpty" id=1]
 
@@ -76,11 +75,6 @@ __meta__ = {
 
 [node name="FadeTransition" parent="." instance=ExtResource( 6 )]
 position = Vector2( 136, 16 )
-
-[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
-stream = ExtResource( 7 )
-volume_db = -30.0
-autoplay = true
 
 [connection signal="transition_finished" from="CircleGrowingTransition" to="." method="_on_CircleGrowingTransition_transition_finished"]
 [connection signal="pressed" from="PlayButton" to="." method="_on_PlayButton_pressed"]
