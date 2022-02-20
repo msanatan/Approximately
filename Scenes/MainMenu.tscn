@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=20 format=2]
 
 [ext_resource path="res://Assets/Resources/TitleFont.tres" type="DynamicFont" id=1]
 [ext_resource path="res://Scripts/MainMenu.gd" type="Script" id=2]
@@ -6,6 +6,8 @@
 [ext_resource path="res://Assets/Resources/ButtonFont.tres" type="DynamicFont" id=4]
 [ext_resource path="res://Scenes/Game/CircleGrowingTransition.tscn" type="PackedScene" id=5]
 [ext_resource path="res://Scenes/Game/FadeTransition.tscn" type="PackedScene" id=6]
+[ext_resource path="res://Assets/Fonts/Kenney Pixel Square.ttf" type="DynamicFontData" id=7]
+[ext_resource path="res://Assets/Images/UI/volume-up-4-512.png" type="Texture" id=8]
 
 [sub_resource type="StyleBoxEmpty" id=1]
 
@@ -16,6 +18,20 @@
 [sub_resource type="StyleBoxEmpty" id=4]
 
 [sub_resource type="StyleBoxEmpty" id=5]
+
+[sub_resource type="DynamicFont" id=6]
+size = 30
+font_data = ExtResource( 7 )
+
+[sub_resource type="StyleBoxEmpty" id=12]
+
+[sub_resource type="StyleBoxEmpty" id=8]
+
+[sub_resource type="StyleBoxEmpty" id=9]
+
+[sub_resource type="StyleBoxEmpty" id=10]
+
+[sub_resource type="StyleBoxEmpty" id=11]
 
 [node name="MainMenu" type="Node2D"]
 script = ExtResource( 2 )
@@ -73,9 +89,41 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[node name="SoundButton" type="Button" parent="."]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = 152.0
+margin_top = 512.0
+margin_right = 280.0
+margin_bottom = 576.0
+custom_colors/font_color_disabled = Color( 0.0588235, 0.239216, 0.666667, 1 )
+custom_colors/font_color_focus = Color( 0.0588235, 0.239216, 0.666667, 1 )
+custom_colors/font_color = Color( 0.0588235, 0.239216, 0.666667, 1 )
+custom_colors/font_color_hover = Color( 0.0588235, 0.239216, 0.666667, 1 )
+custom_colors/font_color_pressed = Color( 0.0588235, 0.239216, 0.666667, 1 )
+custom_fonts/font = SubResource( 6 )
+custom_styles/hover = SubResource( 12 )
+custom_styles/pressed = SubResource( 8 )
+custom_styles/focus = SubResource( 9 )
+custom_styles/disabled = SubResource( 10 )
+custom_styles/normal = SubResource( 11 )
+text = "Sound"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="SoundIcon" type="Sprite" parent="SoundButton"]
+modulate = Color( 0.0588235, 0.239216, 0.666667, 1 )
+position = Vector2( 144, 32 )
+scale = Vector2( 0.05, 0.05 )
+texture = ExtResource( 8 )
+
 [node name="FadeTransition" parent="." instance=ExtResource( 6 )]
 position = Vector2( 136, 16 )
 
 [connection signal="transition_finished" from="CircleGrowingTransition" to="." method="_on_CircleGrowingTransition_transition_finished"]
 [connection signal="pressed" from="PlayButton" to="." method="_on_PlayButton_pressed"]
+[connection signal="pressed" from="SoundButton" to="." method="_on_SoundButton_pressed"]
 [connection signal="transition_finished" from="FadeTransition" to="." method="_on_FadeTransition_transition_finished"]
